@@ -1,19 +1,33 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
+import ItemList from "../ItemList"
 
+export const ItemListContainer= (props) =>{
 
-const Mensaje = (props) =>{
+    const [productos, setProductos] = useState([])
+    const [loading, setLoading] = useState(true);
+    
 
+    useEffect(() =>{
+        fetch("https://fakestoreapi.com/products")
+        .then((res) => res.json())
+        .then((json) => setProductos(json))
+        .catch((error) => {
+          console.log(error);
+        })
+        .finally(setLoading(false))
+    },[])
 
     return(
         <main>
             <h1 style={style.title}>Bienvenidos</h1>
             <h2 style={style.text}>{props.gretting}</h2>
+            {<>{loading ? <h1>Cargando...</h1> : <ItemList products={productos} />}</>}
         </main>
 
     )
 }
 
-export default Mensaje
+
 
 const style = {
     title:{
