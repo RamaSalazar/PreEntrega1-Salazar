@@ -1,26 +1,23 @@
-import { areArraysEqual } from "@mui/base";
 import React, { useEffect, useState } from "react";
 import ItemDetail from "../Components/ItemDetail"
+import { useParams } from "react-router-dom";
 
 export const ItemDetailContainer = ({ greeting }) => {
   const [product, setProduct] = useState([]);
   const [loading, setLoading] = useState(true);
+  const {id} = useParams()
+  const URL_BASE = "https://fakestoreapi.com/products"
+  const URL_PROD = `${URL_BASE}/${id}` 
 
-  useEffect(() => {
-    const getProducts = async () => {
-      try {
-        const res = await fetch("https://fakestoreapi.com/products/1")
-        const data = await res.json();
-        setProduct(data);
-      } catch {
-        console.log("error");
-      } finally {
-        setLoading(false);
-      }
-    };
-    getProducts();
-  }, []);
-
+  useEffect(() =>{
+    fetch(id == undefined ? URL_BASE : URL_PROD )  
+    .then((res) => res.json())
+    .then((json) => setProduct(json))
+    .catch((error) => {
+      console.log(error);
+    })
+    .finally(setLoading(false))
+},[id])
   return (
     <>
       <h1>{greeting}</h1>

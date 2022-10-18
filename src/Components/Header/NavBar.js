@@ -1,7 +1,7 @@
 import React from "react";
 import logo from "../../img/logo.svg"
 import Cart from "./CartWidget"
-import { Link, NavLink } from "react-router-dom";
+import { Link,} from "react-router-dom";
 
 const NavBar = () =>{
 
@@ -19,9 +19,7 @@ const NavBar = () =>{
             </Link>
             <h1 style={style.h1}>Kuntur</h1>
             <section style={style.nav}>
-                <Link to="/cart">
                     <Cart />
-                </Link>
                 <nav >
                     <ul style={style.ul}>
                         <li>

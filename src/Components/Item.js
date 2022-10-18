@@ -1,5 +1,6 @@
 import React from "react";
 import Card from "@mui/material/Card";
+import { NavLink, } from "react-router-dom";
 import {
   CardContent,
   CardMedia,
@@ -34,9 +35,11 @@ const Item = ({ product }) => {
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button size="small" color="primary">
-          Ver Detalles
-        </Button>
+        <NavLink to={`/producto/${product.id}`}>
+          <Button size="small" color="primary">
+            Ver Detalles
+          </Button>
+        </NavLink>
       </CardActions>
     </Card>
   );
