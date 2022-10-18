@@ -1,28 +1,32 @@
 import React from "react";
 import logo from "../../img/logo.svg"
 import Cart from "./CartWidget"
-import { height } from "@mui/system";
+import { Link, NavLink } from "react-router-dom";
 
 const NavBar = () =>{
 
     const linkHeader = [
-        {name:"Catalogo", id:0, link:""},
-        {name:"Galeria", id:1, link:""},
-        {name:"Quienes Somos", id:2, link:""},
-        {name:"Contactanos", id:3, link:""}
+        {name:"electronics", id:0, link:"/categoria/electronics"},
+        {name:"jewelery", id:1, link:"/categoria/jewelery"},
+        {name:"men's clothing", id:2, link:"/categoria/men's clothing"},
+        {name:"women's clothing", id:3, link:"/categoria/women's clothing"}
     ]
 
     return(
         <header style={style.header}>
-            <img  src={logo} alt="" />
+            <Link to="/">
+                <img  src={logo} alt="" />
+            </Link>
             <h1 style={style.h1}>Kuntur</h1>
             <section style={style.nav}>
-                <Cart />
+                <Link to="/cart">
+                    <Cart />
+                </Link>
                 <nav >
                     <ul style={style.ul}>
                         <li>
                             {linkHeader.map((cat)=>{
-                                return <a style={style.a} key={cat.id} href={cat.link}>{cat.name}</a>
+                                return <Link style={style.a} key={cat.id} to={cat.link}>{cat.name}</Link>
                             })}
                         </li>
                     </ul>
