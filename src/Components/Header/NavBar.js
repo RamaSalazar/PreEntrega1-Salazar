@@ -1,6 +1,6 @@
 import React from "react";
 import logo from "../../img/logo.svg"
-import Cart from "./CartWidget"
+import {CartWidget} from "../Header/CartWidget"
 import { Link,} from "react-router-dom";
 
 const NavBar = () =>{
@@ -19,7 +19,9 @@ const NavBar = () =>{
             </Link>
             <h1 style={style.h1}>Kuntur</h1>
             <section style={style.nav}>
-                    <Cart />
+            <Link to="/cart">
+                <CartWidget/>
+            </Link>
                 <nav >
                     <ul style={style.ul}>
                         <li>
@@ -29,6 +31,7 @@ const NavBar = () =>{
                         </li>
                     </ul>
                 </nav>
+
             </section>
 
         </header>

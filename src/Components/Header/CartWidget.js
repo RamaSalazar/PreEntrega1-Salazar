@@ -1,17 +1,15 @@
-import React from "react";
+import React, {useContext} from "react";
 import LocalMallIcon from '@mui/icons-material/LocalMall';
+import { Context } from "../../Context/CartContext";
 
 
-const cart = () =>{
-    return(
-        <LocalMallIcon fontSize="large" style={style.icon}/>
-    )
-}
-
-const style ={
-    icon:{
-        marginRight: "1rem",
-    }
-}
-
-export default cart
+export const CartWidget = () => {
+    const { qty } = useContext(Context);
+    return (
+      <>
+        <p>{qty}</p>
+        <LocalMallIcon color="primary" fontSize="large" />
+      </>
+    );
+  };
+  

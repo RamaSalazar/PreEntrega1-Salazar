@@ -1,37 +1,40 @@
 import React, {useEffect, useState} from "react";
 import ItemList from "../ItemList"
 import { useParams } from "react-router-dom";
+import {getDocs, collection, query, where,} from "firebase/firestore"
+import {db} from "../../fireBase/fireBase"
 
 export const ItemListContainer= (props) =>{
 
     const [productos, setProductos] = useState([])
     const [loading, setLoading] = useState(true);
     const {id} = useParams()
-    const URL_BASE = "https://fakestoreapi.com/products"
-    const URL_CAT= `${URL_BASE}/category/${id}`
-    // useEffect(()=>{
-    //     const getProducts = async () =>{
-    //         try{
-    //             const res = await fetch("https://fakestoreapi.com/products/category/jeweler")
-    //             const data = await res.json()
-    //             setProductos(data)
-    //         }catch{
-    //             console.log("error");
-    //         }finally{
-    //             setLoading(false)
-    //         }
-    //     }
-    //     getProducts()
+    const prodCollection = collection(db,"productos")
+    const cat = query(prodCollection,where("category","==", "electronics")) 
 
-    // },[])
     useEffect(() =>{
-        fetch(id == undefined?URL_BASE : URL_CAT )  
-        .then((res) => res.json())
-        .then((json) => setProductos(json))
+        getDocs(id==undefined?prodCollection:cat )
+        .then((result)=>{
+            const listProd = result.docs.map(item=>{
+                return {
+                    ...item.data(),
+                    id: item.id}
+            })
+            console.log(listProd);
+            setProductos(listProd);
+        })
         .catch((error) => {
-          console.log(error);
+            console.log(error);
         })
         .finally(setLoading(false))
+
+        // fetch(id == undefined?URL_BASE : URL_CAT )  
+        // .then((res) => res.json())
+        // .then((json) => setProductos(json))
+        // .catch((error) => {
+        //   console.log(error);
+        // })
+        // .finally(setLoading(false))
     },[id])
 
     return(

@@ -1,4 +1,5 @@
 import React, {useState} from "react";
+
 const ContCart = ({stock, onAdd}) =>{
     
     const [contador, setContador] = useState(1)
@@ -22,12 +23,13 @@ const ContCart = ({stock, onAdd}) =>{
 
     return(
         <section style={style.card}>
-            <h1 >Remera de gatito</h1>
-            <span style={style.cont}>{contador}</span>
+            <h1 >Cuantos productos desea añadir</h1>
             <div style={style.div}>
-                <button style={style.btn} onClick={sumar}>+</button>
-                <button style={style.btn} onClick={restar}>-</button>
+            <button style={style.btn} onClick={restar}>-</button>
+            <span style={style.cont}>{contador}</span>
+            <button style={style.btn} onClick={sumar}>+</button>
             </div>
+            <button>Agregar al carrito</button>
         </section>
     )
 }
